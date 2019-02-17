@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% comment %} USE CRISPY FORMS {% endcomment %}
+
 {% block content %}
 <form action="{% url 'user-login' %}" method="POST">
     {% csrf_token %}
