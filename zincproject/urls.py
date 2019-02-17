@@ -24,9 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/list/', views.event_list, name='event-list'),
     path('events/detail/<int:event_id>/', views.event_detail, name='event-detail'),
-    path('login-', views.user_login, name='login'),
-    path('logout-', views.user_logout, name='logout'),
-    path('signup-', views.user_register, name='signup'),
+    path('login', views.user_login, name='login'),
+    path('logout', views.user_logout, name='logout'),
+    path('signup', views.user_register, name='signup'),
 ]
 
 
