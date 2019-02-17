@@ -1,5 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from events.models import Event
+from django.contrib.auth import login, authenticate, logout 
+
+from .models import Event
+from .forms import UserRegisterForm, UserLoginForm
+
+
 
 # Create your views here.
 def event_list(request):

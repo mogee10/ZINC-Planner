@@ -18,9 +18,16 @@ from django.urls import path
 from events import views
 from django.conf import settings
 from django.conf.urls.static import static
+from events import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('items/list/', views.event_list, name='event-list'),
-    path('items/detail/<int:event_id>/', views.event_detail, name='event-detail'),
+    path('events/list/', views.event_list, name='event-list'),
+    path('events/detail/<int:event_id>/', views.event_detail, name='event-detail'),
+    path('login-', views.signin, name='login'),
+    path('logout-', views.signout, name='logout'),
+    path('signup-', views.signup, name='signup'),
 ]
+
+
+
