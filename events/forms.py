@@ -26,7 +26,7 @@ class UserLoginForm(forms.Form):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['owner', ]  # FIX ME
+        exclude = ['organizer', ]
         widgets = {
             'date': forms.DateInput(attrs={"type": "date"}),
         }

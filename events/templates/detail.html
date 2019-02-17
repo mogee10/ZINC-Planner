@@ -1,50 +1,14 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}Detail{% endblock title %}
-
 {% block content %}
-
-<br>
-<div class="card">
-  <h5 class="card-header">Event Info</h5>
-  {% if event.logo %}
-    <img class="card-img-top" src="{{event.logo.url}}" alt="Hey Noob, look at me...">
-  {% endif %}
-  <div class="card-body">
-    <h5 class="card-title">{{event.name}}</h5>
-    <p class="card-text">{{event.description|linebreaks}}</p>
-    <p class="card-text">Start Time: {{event.opening_time}}</p>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Our Items</h5>
-  </div>
-  <ul class="list-group list-group-flush">
-    {% for item in items %}
-      <li class="list-group-item">
-        <p><b>{{item.name}}</b></p>
-        <p>{{item.description|linebreaks}}</p>
-        <p>{{item.price}} KWD</p>
-      </li>
-    {% endfor %}
-  </ul>
-  <div class="card-body">
-    <div class="row text-center">
-        {% if user.id == event.owner.id and user.is_staff %}
-        <div class="col-md-4">
-            <a href="{% url 'event-update' event.id %}" class="btn btn-outline-primary btn-block">Update</a>
+<div class="card mb-3">
+        <img class="card-img-top" height="700" src="{{event.image.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Event: {{event.name}}</h5>
+          <p class="card-text">Description: {{event.description}}</p>
+          <p class="card-text">Organizer: {{event.organizer}}</p>
+          <p class="card-text">Date: {{event.date}}</p>
         </div>
-        {% endif %}
-        {% if user.id == user.is_staff %}
-        <div class="col-md-4">
-            <a href="{% url 'event-delete' event.id %}" class="btn btn-outline-danger btn-block">Delete</a>
-        </div>
-        {% endif %}
-        {% if user.id == event.owner.id and user.is_staff %}
-        <div class="col-md-4">
-            <a href="{% url 'item-create' event.id %}" class="btn btn-outline-success btn-block">Add Item</a>
-        </div>
-        {% endif %}
-    </div>
-  </div>
-</div>
-{% endblock content %}
+      </div>
+{% endblock %}

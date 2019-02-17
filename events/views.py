@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from events.models import Event
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 
 from .models import Event
 from .forms import UserRegisterForm, UserLoginForm, EventForm
@@ -10,9 +11,13 @@ from .forms import UserRegisterForm, UserLoginForm, EventForm
 
 # Create your views here.
 def event_list(request):
-
+	events = Event.objects.all()
+	query = request.GET.get('q')
+	if query:
+		events = events.filter(name__contains=query)
+		
 	context = {
-		"events":Event.objects.all()
+		"events": events,
 	}
 	return render(request, 'list.html', context)
 
@@ -43,9 +48,9 @@ def event_create(request):
 
 def event_delete(request, event_id):
 	event_obj = Event.objects.get(id=event_id)
-	if event_obj.owner.id != request.user.id:
+	if event_obj.organizer.id != request.user.id:
 		return redirect('noaccess')
-	restaurant_obj.delete()
+	event_obj.delete()
 	return redirect('event-list')
 
 def noaccess(request):

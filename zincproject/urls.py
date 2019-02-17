@@ -31,5 +31,6 @@ urlpatterns = [
     path('events/create/', views.event_create, name='event-create'),
     path('events/<int:event_id>/delete/',
          views.event_delete, name='event-delete'),
-
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
