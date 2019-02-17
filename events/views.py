@@ -33,11 +33,21 @@ def event_create(request):
 			event = form.save(commit=False)
 			event.owner = request.user
 			event.save()
-			return redirect('list')
+			return redirect('event-list')
 	context = {
 		"form":form,
 	}
 	return render(request, 'create.html', context)
+
+def event_delete(request, event_id):
+	event_obj = Event.objects.get(id=event_id)
+	if event_obj.owner.id != request.user.id:
+		return redirect('noaccess')
+	restaurant_obj.delete()
+	return redirect('event-list')
+
+def noaccess(request):
+	return render(request, 'noaccess.html')
 
 def user_register(request):
     register_form = UserRegisterForm()

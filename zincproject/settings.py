@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'events',
-
+]
 #     'allauth',
 #     'allauth.account',
 #     'allauth.socialaccount',
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
 #     }
 
 # }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
