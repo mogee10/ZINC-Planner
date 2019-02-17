@@ -18,3 +18,12 @@ class UserLoginForm(forms.Form):
         }
 
 
+<<<<<<< HEAD
+=======
+
+class UserLoginForm(forms.Form):
+	
+
+class EventForm(forms.ModelForm):
+	class Meta:
+>>>>>>> 99f9a3df552a9772b3e0de29d75c0f4f1f9540e4
