@@ -5,15 +5,33 @@ from events.models import Event
 def event_list(request):
 
 	context = {
+		"events":Event.objects.all()
 	}
 	return render(request, 'list.html', context)
 
 def event_detail(request):
 
+	event = Event.objects.get(id=event_id)
 	context = {
+		"event": event,
 	}
 	return render(request, 'detail.html', context)
 
+def event_create(request):
+	if request.user.is_anonymous:
+		return redirect('signin')
+	form = EventForm()
+	if request.method == "POST":
+		form = EventForm(request.POST, request.FILES)
+		if form.is_valid():
+			event = form.save(commit=False)
+			event.owner = request.user
+			event.save()
+			return redirect('list')
+	context = {
+		"form":form,
+	}
+	return render(request, 'create.html', context)
 
 def user_register(request):
     register_form = UserRegisterForm()

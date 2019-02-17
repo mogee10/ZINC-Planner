@@ -37,30 +37,30 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'events'
+    'events',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+#     'allauth',
+#     'allauth.account',
+#     'allauth.socialaccount',
 
-    'allauth.socialaccount.providers.google',
+#     'allauth.socialaccount.providers.google',
 
-]
+# ]
 
-SITE_ID = 1
+# SITE_ID = 1
 
-SOCIALACCOUNT_PROVIDERS={
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'offline',
-        }
-    }
+# SOCIALACCOUNT_PROVIDERS={
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'offline',
+#         }
+#     }
 
-}
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -8,3 +8,7 @@ class UserRegisterForm(forms.ModelForm):
 
 
 class UserLoginForm(forms.Form):
+	
+
+class EventForm(forms.ModelForm):
+	class Meta:
