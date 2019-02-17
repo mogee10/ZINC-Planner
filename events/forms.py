@@ -24,5 +24,5 @@ class EventForm(forms.ModelForm):
 		model = Event
 		exclude = ['owner',]
 		widgets = {
-			'date': forms.DateTimeInput(),
+			'date': forms.DateInput(attrs={"type": "date"}),
 		}
