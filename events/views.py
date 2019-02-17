@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from events.models import Event
-from django.contrib.auth import login, authenticate, logout 
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
 
 from .models import Event
-from .forms import UserRegisterForm, UserLoginForm
+from .forms import UserRegisterForm, UserLoginForm, EventForm
 
 
 
@@ -15,7 +16,7 @@ def event_list(request):
 	}
 	return render(request, 'list.html', context)
 
-def event_detail(request):
+def event_detail(request, event_id):
 
 	event = Event.objects.get(id=event_id)
 	context = {
@@ -24,6 +25,7 @@ def event_detail(request):
 	return render(request, 'detail.html', context)
 
 def event_create(request):
+	form = EventForm()
 	if request.user.is_anonymous:
 		return redirect('signin')
 	form = EventForm()
@@ -31,7 +33,7 @@ def event_create(request):
 		form = EventForm(request.POST, request.FILES)
 		if form.is_valid():
 			event = form.save(commit=False)
-			event.owner = request.user
+			event.organizer = request.user
 			event.save()
 			return redirect('event-list')
 	context = {
