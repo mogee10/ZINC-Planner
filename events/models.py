@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from fontawesome.fields import IconField
 
 # Create your models here.
 class Event (models.Model):
@@ -11,3 +12,6 @@ class Event (models.Model):
 
 	def __str__(self):
 		return self.name
+
+class Category(models.Model):
+	icon=IconField()

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events',
     'crispy_forms',
+    'fontawesome',
 
     'allauth',
     'allauth.account',
