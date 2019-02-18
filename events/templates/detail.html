@@ -9,6 +9,14 @@
           <p class="card-text">Description: {{event.description}}</p>
           <p class="card-text">Organizer: {{event.organizer}}</p>
           <p class="card-text">Date: {{event.date}}</p>
+          {% if request.user == event.organizer %}
+        <div class="col-md-4">
+            <a href="{% url 'event-update' event.id %}" class="btn btn-outline-primary btn-block">Update</a>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'event-delete' event.id %}" class="btn btn-outline-primary btn-block">Delete</a>
+        </div>
+        {% endif %}
         </div>
       </div>
 {% endblock %}

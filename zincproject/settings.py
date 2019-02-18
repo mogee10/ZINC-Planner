@@ -33,38 +33,39 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'events',
     'crispy_forms',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'allauth.socialaccount.providers.google',
+
 ]
 
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        }
+    }
+}
+
+LOGIN_REDIRECT_URL = ""
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-#     'allauth',
-#     'allauth.account',
-#     'allauth.socialaccount',
-
-#     'allauth.socialaccount.providers.google',
-
-# ]
-
-# SITE_ID = 1
-
-# SOCIALACCOUNT_PROVIDERS={
-#     'google': {
-#         'SCOPE': [
-#             'profile',
-#             'email',
-#         ],
-#         'AUTH_PARAMS': {
-#             'access_type': 'offline',
-#         }
-#     }
-
-# }
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

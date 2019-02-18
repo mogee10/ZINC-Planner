@@ -3,6 +3,7 @@ from events.models import Event
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from django.db.models import Q
 
 from .models import Event
 from .forms import UserRegisterForm, UserLoginForm, EventForm
@@ -14,7 +15,11 @@ def event_list(request):
 	events = Event.objects.all()
 	query = request.GET.get('q')
 	if query:
-		events = events.filter(name__contains=query)
+		events = events.filter(
+			Q(name__contains=query)|
+            Q(description__icontains=query)|
+            Q(organizer__username__icontains=query)
+            ).distinct()
 		
 	context = {
 		"events": events,
@@ -45,6 +50,25 @@ def event_create(request):
 		"form":form,
 	}
 	return render(request, 'create.html', context)
+
+def event_update(request,event_id):
+	event_obj = Event.objects.get(id=event_id)
+	organizer = event_obj.organizer 
+
+	if request.user.id is not organizer.id :
+		return redirect ('no-access')
+
+	form = EventForm(instance=event_obj)
+	if request.method == "POST":
+		form = EventForm(request.POST, request.FILES, instance=event_obj)
+		if form.is_valid():
+			form.save()
+			return redirect('event-list')
+	context = {
+		"event_obj": event_obj,
+		"form": form,
+	}
+	return render(request, "update.html", context)
 
 def event_delete(request, event_id):
 	event_obj = Event.objects.get(id=event_id)
