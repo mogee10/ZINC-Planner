@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from events.models import Event
+from events.models import Event, Booking
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -28,7 +28,6 @@ def event_list(request):
 
 
 def event_detail(request, event_id):
-
 	event = Event.objects.get(id=event_id)
 	context = {
 		"event": event,
@@ -136,6 +135,26 @@ def user_logout(request):
 	logout(request)
 
 	return redirect('event-list')
+
+def booking(request, event_id):
+	event_object = Event.objects.get(id=event_id)
+
+	if request.user.is_anonymous:
+		return redirect('user-login')
+	
+	favorite, created = Booking.objects.get_or_create(user=request.user, event=event_object)
+	if created:
+		action = "booked"
+	else:
+		favorite.delete()
+		action="booking canceled"
+	
+	response = {
+		"action": action,
+	}
+	return JsonResponse(response, safe=False)
+
+
 
 
 

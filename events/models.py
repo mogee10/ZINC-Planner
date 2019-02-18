@@ -17,5 +17,5 @@ class Category(models.Model):
 	icon=IconField()
 
 class Booking(models.Model):
-	event =  models.ForeignKey(User)
-	user = models.ForeignKey()
+	event =  models.ForeignKey(Event, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)

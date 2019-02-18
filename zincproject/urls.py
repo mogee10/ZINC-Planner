@@ -27,6 +27,7 @@ urlpatterns = [
     path('events/<int:event_id>/',
          views.event_detail, name='event-detail'),
     path('dashboard/', views.event_dashboard, name='event-dashboard'),
+    path('events/<int:event_id>/booked/', views.booking, name='booked-event'),
 
     path('login/', views.user_login, name='user-login'),
     path('logout/', views.user_logout, name='user-logout'),
