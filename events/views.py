@@ -17,14 +17,15 @@ def event_list(request):
 	if query:
 		events = events.filter(
 			Q(name__contains=query)|
-            Q(description__icontains=query)|
-            Q(organizer__username__icontains=query)
-            ).distinct()
+			Q(description__icontains=query)|
+			Q(organizer__username__icontains=query)
+			).distinct()
 		
 	context = {
 		"events": events,
 	}
 	return render(request, 'list.html', context)
+
 
 def event_detail(request, event_id):
 
@@ -33,6 +34,26 @@ def event_detail(request, event_id):
 		"event": event,
 	}
 	return render(request, 'detail.html', context)
+
+def event_dashboard(request):
+	events = Event.objects.filter(organizer=request.user)
+
+	if request.user.is_anonymous:
+		return redirect('user-login')
+		
+	# query = request.GET.get('q')
+	# if query:
+	# 	events = events.filter(
+	# 		Q(name__contains=query)|
+	# 		Q(description__icontains=query)|
+	# 		Q(organizer__username__icontains=query)
+	# 		).distinct()
+		
+	context = {
+		"events": events,
+	}
+	return render(request, 'dashboard.html', context)
+
 
 def event_create(request):
 	form = EventForm()

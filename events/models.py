@@ -15,3 +15,7 @@ class Event (models.Model):
 
 class Category(models.Model):
 	icon=IconField()
+
+class Booking(models.Model):
+	event =  models.ForeignKey(User)
+	user = models.ForeignKey()
