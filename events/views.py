@@ -29,7 +29,9 @@ def event_list(request):
 
 def event_detail(request, event_id):
 	event = Event.objects.get(id=event_id)
-	if event.booking_set.all().count() >= event.capacity:
+	if event.booking_set.filter(user=request.user).count() > 0:
+		action = "booked"
+	elif event.booking_set.all().count() >= event.capacity:
 		action = "full"
 	else:
 		action = "book"
@@ -64,7 +66,7 @@ def event_dashboard(request):
 def event_create(request):
 	form = EventForm()
 	if request.user.is_anonymous:
-		return redirect('signin')
+		return redirect('user-login')
 	form = EventForm()
 	if request.method == "POST":
 		form = EventForm(request.POST, request.FILES)
@@ -151,22 +153,31 @@ def booking(request, event_id):
 	
 	favorite, created = Booking.objects.get_or_create(user=request.user, event=event_object)
 
-
-
-	if created:
-		action = "booked"
-	else:
+	if not created:
 		favorite.delete()
-		action="booking canceled"
 	
-	response = {
-		"action": action,
+	return redirect('event-detail', event_id)
+
+
+def attended(request):
+	bookings = Booking.objects.filter(user=request.user)
+	if request.user.is_anonymous:
+		return redirect('user-login')
+
+	context = {
+		"bookings": bookings,
 	}
-	return JsonResponse(response, safe=False)
-
-
-
-
+	return render(request, 'attended.html', context)
+	# events = Event.objects.filter(
+	# 	booked = booked,
+	# 	event=request.event.event_id
+	# 	)
+	# if request.user.is_anonymous:
+	# 	return redirect('user-login')
+	# context = {
+	# 	"event_obj": event_obj,
+	# 	}
+	# return render(request,'attended.html',context)
 
 
 
