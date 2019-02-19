@@ -64,7 +64,7 @@ def event_dashboard(request):
 def event_create(request):
 	form = EventForm()
 	if request.user.is_anonymous:
-		return redirect('signin')
+		return redirect('user-login')
 	form = EventForm()
 	if request.method == "POST":
 		form = EventForm(request.POST, request.FILES)
@@ -165,8 +165,25 @@ def booking(request, event_id):
 	return JsonResponse(response, safe=False)
 
 
+def attended(request):
+	bookings = Booking.objects.filter(user=request.user)
+	if request.user.is_anonymous:
+		return redirect('user-login')
 
-
+	context = {
+		"bookings": bookings,
+	}
+	return render(request, 'attended.html', context)
+	# events = Event.objects.filter(
+	# 	booked = booked,
+	# 	event=request.event.event_id
+	# 	)
+	# if request.user.is_anonymous:
+	# 	return redirect('user-login')
+	# context = {
+	# 	"event_obj": event_obj,
+	# 	}
+	# return render(request,'attended.html',context)
 
 
 
