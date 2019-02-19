@@ -10,20 +10,22 @@
         <div class="container">
 <div class="row">
         <h2 class="card-title"><strong>Event - </strong> {{event.name}}</h2>
-        <img class="card-img-top my-5" height="700" src="{{event.image.url}}" alt="Card image cap">
+
+        <img class="card-img-top my-3" height="700" src="{{event.image.url}}" alt="Card image cap""> 
+
         <div class="card-body">
           <h4 class="card-text"><strong>Description:</strong> {{event.description}}</p> 
           <p class="card-text"><strong>Organizer:</strong> {{event.organizer}}</p>
           <p class="card-text"><strong>Date: </strong>{{event.date}}</p>
 
           {% if action == 'full' %}
-            <button class="btn btn-light" disabled>
+            <button class="btn btn-danger" disabled>
             Fully Booked!
             </button>
               {% else %}
           <a href="{% url 'booked-event' event.id %}">
             <button class="btn btn-light" >
-            {% if action == 'booked'%}Booked{% else %}Book Event!{% endif %}
+            {% if action == 'booked'%}Booked{% else %}Book Event{% endif %}
             </button>
           </a>
               {% endif %}

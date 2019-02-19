@@ -15,7 +15,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<div class="logo"><a href="index.html">ZINC . .  <span>events made easy</span></a></div>
+				<div class="logo"><a href="index.html">ZINC . . .  <span>events made easy</span></a></div>
 				
 			</header>
 
@@ -69,33 +69,21 @@
 				</article>
 			</section>
 
-	 
-
-	
-				
-
-
 <br>
 <div class="container">
 <div class="row">
 		{% for event in events %}
 		<div class="col-md-4">
-				<div class="card my-card">
-					<div>
-						<li class="list-group-item text-center">
+				<div class="card my-card text-center my-3">
+					<div class="card-body">
 						<h3 class="card-title">{{event.name}}</h3>
 						<div class="image round fit">
 						<img id="eventimg" class="card-img-top" height="200" src="{{event.image.url}}">
 						</div>
 						<p class="card-text">{{event.description}}</p>
-						<p class="card-text">{{event.organizer}}</p>
+						<h5 class="card-text">{{event.organizer}}</h5>
+						<a href="{% url 'event-detail' event.id %}" class="btn btn-outline-dark">View</a>
 					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item text-center">
-								<a href="{% url 'event-detail' event.id %}" class="btn btn-outline-dark">View</a>
-							 
-						</li>
-					</ul>
 				</div>
 		</div>
 		{% endfor %}
