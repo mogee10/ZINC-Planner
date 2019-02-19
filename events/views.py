@@ -29,8 +29,15 @@ def event_list(request):
 
 def event_detail(request, event_id):
 	event = Event.objects.get(id=event_id)
+	if event.booking_set.all().count() >= event.capacity:
+		action = "full"
+	else:
+		action = "book"
+	print(event.booking_set.all().count())
+	# print(event.capacity)
 	context = {
 		"event": event,
+		"action": action,
 	}
 	return render(request, 'detail.html', context)
 
@@ -143,6 +150,9 @@ def booking(request, event_id):
 		return redirect('user-login')
 	
 	favorite, created = Booking.objects.get_or_create(user=request.user, event=event_object)
+
+
+
 	if created:
 		action = "booked"
 	else:
