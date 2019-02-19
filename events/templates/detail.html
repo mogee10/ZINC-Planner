@@ -9,7 +9,20 @@
           <p class="card-text">Description: {{event.description}}</p>
           <p class="card-text">Organizer: {{event.organizer}}</p>
           <p class="card-text">Date: {{event.date}}</p>
-          <a href="{% url 'booked-event' event.id %}"><button class="btn btn-light">Book Event!</button></a>
+
+          {% if action == 'full' %}
+            <button class="btn btn-light" disabled>
+            Fully Booked!
+            </button>
+              {% else %}
+          <a href="{% url 'booked-event' event.id %}">
+            <button class="btn btn-light" >
+            Book Event!
+            </button>
+          </a>
+              {% endif %}
+
+
           {% if request.user == event.organizer %}
         <div class="col-md-4">
             <a href="{% url 'event-update' event.id %}" class="btn btn-outline-primary btn-block">Update</a>
