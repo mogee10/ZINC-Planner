@@ -1,25 +1,38 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+
 {% block title %}Detail{% endblock title %}
+
 {% block content %}
-<div class="card mb-3">
+
+        <div class="container">
+<div class="row">
+        <h2 class="card-title"><strong>Event - </strong> {{event.name}}</h2>
         <img class="card-img-top" height="700" src="{{event.image.url}}" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Event: {{event.name}}</h5>
-          <p class="card-text">Description: {{event.description}}</p>
-          <p class="card-text">Organizer: {{event.organizer}}</p>
-          <p class="card-text">Date: {{event.date}}</p>
-          <a href="{% url 'booked-event' event.id %}"><button class="btn btn-light">Book Event!</button></a>
+         <br>
+<div class="align-right">
+          <a href="{% url 'booked-event' event.id %}"><button class="btn btn-light">Book Event</button></a>
+        </div>
+          <h4 class="card-text"><strong>Description:</strong> {{event.description}}</p> 
+          <p class="card-text"><strong>Organizer:</strong> {{event.organizer}}</p>
+          <p class="card-text"><strong>Date: </strong>{{event.date}}</p>
+          
           {% if request.user == event.organizer %}
-        <div class="col-md-4">
-            <a href="{% url 'event-update' event.id %}" class="btn btn-outline-primary btn-block">Update</a>
+        <div class="align-right">
+            <a href="{% url 'event-update' event.id %}" class="btn btn-outline-secondary">Update</a> <a href="{% url 'event-delete' event.id %}" class="btn btn-outline-secondary">Delete</a>
         </div>
-        <div class="col-md-4">
-            <a href="{% url 'event-delete' event.id %}" class="btn btn-outline-primary btn-block">Delete</a>
-        </div>
+      </br>
         {% endif %}
         </div>
       </div>
-
+</div></div>
 
 {% endblock %}
+
+
+
+
+

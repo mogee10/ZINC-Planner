@@ -1763,6 +1763,12 @@
 		hr.major {
 			margin: 3rem 0;
 		}
+	#eventimg
+	{border-radius:50%;
+	width:70%;
+
+
+	}
 
 	.align-left {
 		text-align: left;

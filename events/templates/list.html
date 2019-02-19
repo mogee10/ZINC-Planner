@@ -6,96 +6,99 @@
 
 {% block content %}
 <!-- <head>
-    <title>ZINC</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-  </head> -->
-  <body class="subpage">
+		<title>ZINC</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head> -->
+	<body class="subpage">
 
-    <!-- Header -->
-      <header id="header">
-        <div class="logo"><a href="index.html">ZINC..  <span>events made easy</span></a></div>
-        
-      </header>
+		<!-- Header -->
+			<header id="header">
+				<div class="logo"><a href="index.html">ZINC . .  <span>events made easy</span></a></div>
+				
+			</header>
 
 
-    <!-- Banner -->
-      <section class="banner half">
-        <article>
-          <img src="{% static 'images/zinc_group_pic.jpg' %}" alt="" />
-          <div class="inner">
-            <header>
-              <p>Innovation at its finest</p>
-              <h2>ZINC</h2>
-            </header>
-          </div>
-        </article>
-        <article>
-          <img src="{% static 'images/passion.jpg' %}" alt="" />
-          <div class="inner">
-            <header>
-              <p>Passion, innovation, resilience</p>
-              <h2>ZAIN KUWAIT</h2>
-            </header>
-          </div>
-        </article>
-        <article>
-          <img src="{% static 'images/room.jpg' %}"  alt="" />
-          <div class="inner">
-            <header>
-              <p>Perfect space</p>
-              <h2>THE MEETING POINT</h2>
-            </header>
-          </div>
-        </article>
-        <article>
-          <img src="{% static 'images/tv.jpg' %}"  alt="" />
-          <div class="inner">
-            <header>
-              <p>Events, talks, and enlightenment</p>
-              <h2>DISPLAY ROOM</h2>
-            </header>
-          </div>
-        </article>
-        <article>
-          <img src="{% static 'images/table.jpg' %}"  alt="" />
-          <div class="inner">
-            <header>
-              <p>Join the discussion, get inspired</p>
-              <h2>TABLE TALK</h2>
-            </header>
-          </div>
-        </article>
-      </section>
+		<!-- Banner -->
+			<section class="banner half">
+				<article>
+					<img src="{% static 'images/genz4.jpg' %}" alt="" />
+					<div class="inner">
+						<header>
+							<p>Innovation at its finest</p>
+							<h2>ZINC</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/passion.jpg' %}" alt="" />
+					<div class="inner">
+						<header>
+							<p>Passion, innovation, resilience</p>
+							<h2>ZAIN KUWAIT</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/room.jpg' %}"  alt="" />
+					<div class="inner">
+						<header>
+							<p>Perfect space</p>
+							<h2>THE MEETING POINT</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/tv.jpg' %}"  alt="" />
+					<div class="inner">
+						<header>
+							<p>Events, talks, and enlightenment</p>
+							<h2>DISPLAY ROOM</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/table.jpg' %}"  alt="" />
+					<div class="inner">
+						<header>
+							<p>Join the discussion, get inspired</p>
+							<h2>TABLE TALK</h2>
+						</header>
+					</div>
+				</article>
+			</section>
 
-   
+	 
 
-  
-        
+	
+				
 
 
 <br>
 <div class="container">
 <div class="row">
-    {% for event in events %}
-    <div class="col-md-4">
-        <div class="card my-card">
-          <div class="card-body">
-            <h5 class="card-title">{{event.name}}</h5>
-            <img class="card-img-top" height="200" src="{{event.image.url}}">
-            <p class="card-text">{{event.description}}</p>
-            <p class="card-text">{{event.organizer}}</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item text-center">
-                <a href="{% url 'event-detail' event.id %}" class="btn btn-outline-danger">View</a>
-               
-            </li>
-          </ul>
-        </div>
-    </div>
-    {% endfor %}
+		{% for event in events %}
+		<div class="col-md-4">
+				<div class="card my-card">
+					<div>
+						<li class="list-group-item text-center">
+						<h3 class="card-title">{{event.name}}</h3>
+						<div class="image round fit">
+						<img id="eventimg" class="card-img-top" height="200" src="{{event.image.url}}">
+						</div>
+						<p class="card-text">{{event.description}}</p>
+						<p class="card-text">{{event.organizer}}</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item text-center">
+								<a href="{% url 'event-detail' event.id %}" class="btn btn-outline-dark">View</a>
+							 
+						</li>
+					</ul>
+				</div>
+		</div>
+		{% endfor %}
 </div>
 </div>
 {% endblock content %}
