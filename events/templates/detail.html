@@ -23,7 +23,7 @@
               {% else %}
           <a href="{% url 'booked-event' event.id %}">
             <button class="btn btn-light" >
-            Book Event!
+            {% if action == 'booked'%}Booked{% else %}Book Event!{% endif %}
             </button>
           </a>
               {% endif %}
