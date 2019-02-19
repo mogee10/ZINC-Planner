@@ -10,19 +10,28 @@
         <div class="container">
 <div class="row">
         <h2 class="card-title"><strong>Event - </strong> {{event.name}}</h2>
-        <img class="card-img-top" height="700" src="{{event.image.url}}" alt="Card image cap">
+        <img class="card-img-top my-5" height="700" src="{{event.image.url}}" alt="Card image cap">
         <div class="card-body">
-         <br>
-<div class="align-right">
-          <a href="{% url 'booked-event' event.id %}"><button class="btn btn-light">Book Event</button></a>
-        </div>
           <h4 class="card-text"><strong>Description:</strong> {{event.description}}</p> 
           <p class="card-text"><strong>Organizer:</strong> {{event.organizer}}</p>
           <p class="card-text"><strong>Date: </strong>{{event.date}}</p>
+
+          {% if action == 'full' %}
+            <button class="btn btn-light" disabled>
+            Fully Booked!
+            </button>
+              {% else %}
+          <a href="{% url 'booked-event' event.id %}">
+            <button class="btn btn-light" >
+            Book Event!
+            </button>
+          </a>
+              {% endif %}
           
           {% if request.user == event.organizer %}
         <div class="align-right">
-            <a href="{% url 'event-update' event.id %}" class="btn btn-outline-secondary">Update</a> <a href="{% url 'event-delete' event.id %}" class="btn btn-outline-secondary">Delete</a>
+            <a href="{% url 'event-update' event.id %}" class="btn btn-outline-secondary">Update</a>
+            <a href="{% url 'event-delete' event.id %}" class="btn btn-outline-secondary">Delete</a>
         </div>
       </br>
         {% endif %}
