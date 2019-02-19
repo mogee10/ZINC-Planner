@@ -7,18 +7,20 @@
 <div class="container">
 <div class="row">
       {% for event in events %}
-    <div class="col-md-4">
-        <div class="card my-card">
           <div class="card-body">
-            <h5 class="card-title">{{event.name}}</h5>
-            <img class="card-img-top" height="200" src="{{event.image.url}}">
-            <p class="card-text">{{event.description}}</p>
-            <p class="card-text">{{event.organizer}}</p>
+            <h2 class="card-title">{{event.name}}</h2>
+            <div class="image round fit">
+            <img id="eventimg" class="center" height="600" src="{{event.image.url}}">
+            </div>
+            <p class="text-center">{{event.description}}</p>
+            <p class="text-center">{{event.organizer}}</p>
+            <div class="align-center">
+            <a href="{% url 'event-detail' event.id %}" class="btn btn-outline-dark" >View</a>
+          </div>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item text-center">
-                <a href="{% url 'event-detail' event.id %}" class="btn btn-outline-dark">View</a>
-            </li>
+            </li>   
           </ul>
         </div>
     </div>
