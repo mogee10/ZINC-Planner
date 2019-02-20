@@ -23,12 +23,12 @@ from events import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', views.event_list, name='event-list'),
+    path('', views.event_list, name='homepage'),
     path('events/<int:event_id>/',
          views.event_detail, name='event-detail'),
     path('dashboard/', views.event_dashboard, name='event-dashboard'),
     path('events/<int:event_id>/booked/', views.booking, name='booked-event'),
-    path('events/attended/', views.attended, name='event-attended'),
+   
 
     path('login/', views.user_login, name='user-login'),
     path('logout/', views.user_logout, name='user-logout'),

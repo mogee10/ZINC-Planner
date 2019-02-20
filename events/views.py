@@ -23,7 +23,7 @@ def event_list(request):
     context = {
         "events": events,
     }
-    return render(request, 'list.html', context)
+    return render(request, 'homepage.html', context)
 
 
 def event_detail(request, event_id):
@@ -49,16 +49,18 @@ def event_detail(request, event_id):
 
 def event_dashboard(request):
     events = Event.objects.filter(organizer=request.user)
+    bookings = Booking.objects.filter(user=request.user)
 
     if request.user.is_anonymous:
         return redirect('user-login')
 
     context = {
         "events": events,
+        "bookings": bookings,
     }
     return render(request, 'dashboard.html', context)
 
-
+  
 def event_create(request):
     form = EventForm()
     if request.user.is_anonymous:
@@ -70,7 +72,7 @@ def event_create(request):
             event = form.save(commit=False)
             event.organizer = request.user
             event.save()
-            return redirect('event-list')
+            return redirect('homepage')
     context = {
         "form": form,
     }
@@ -89,7 +91,7 @@ def event_update(request, event_id):
         form = EventForm(request.POST, request.FILES, instance=event_obj)
         if form.is_valid():
             form.save()
-            return redirect('event-list')
+            return redirect('homepage')
     context = {
         "event_obj": event_obj,
         "form": form,
@@ -102,7 +104,7 @@ def event_delete(request, event_id):
     if event_obj.organizer.id != request.user.id:
         return redirect('noaccess')
     event_obj.delete()
-    return redirect('event-list')
+    return redirect('homepage')
 
 
 def noaccess(request):
@@ -118,7 +120,7 @@ def user_register(request):
             user.set_password(user.password)
             user.save()
             login(request, user)
-            return redirect('event-list')
+            return redirect('homepage')
     context = {
         "register_form": register_form
     }
@@ -136,7 +138,7 @@ def user_login(request):
                 username=username, password=password)
             if authenticated_user:
                 login(request, authenticated_user)
-                return redirect('event-list')
+                return redirect('homepage')
     context = {
         "login_form": login_form
     }
@@ -146,7 +148,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
 
-    return redirect('event-list')
+    return redirect('homepage')
 
 
 def booking(request, event_id):
@@ -166,12 +168,4 @@ def booking(request, event_id):
     return redirect('event-detail', event_id)
 
 
-def attended(request):
-    bookings = Booking.objects.filter(user=request.user)
-    if request.user.is_anonymous:
-        return redirect('user-login')
 
-    context = {
-        "bookings": bookings,
-    }
-    return render(request, 'attended.html', context)
