@@ -4437,6 +4437,10 @@ body.is-loading .banner:after {
   }
 }
 
+.fa-user-circle {
+  color: #9999ff;
+}
+
 body.is-mobile .banner > article {
   background-attachment: scroll;
 }
