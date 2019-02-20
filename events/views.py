@@ -28,16 +28,21 @@ def event_list(request):
 
 def event_detail(request, event_id):
     event = Event.objects.get(id=event_id)
-    if event.booking_set.filter(user=request.user).count() > 0:
-        action = "booked"
-    elif event.booking_set.all().count() >= event.capacity:
-        action = "full"
-    else:
-        action = "book"
+    action = ""
+    bookings = []
+    if request.user.is_authenticated:
+        bookings = event.booking_set.all()
+        if event.booking_set.filter(user=request.user).count() > 0:
+            action = "booked"
+        elif event.booking_set.all().count() >= event.capacity:
+            action = "full"
+        else:
+            action = "book"
 
     context = {
         "event": event,
         "action": action,
+        "bookings": bookings,
     }
     return render(request, 'detail.html', context)
 
@@ -47,16 +52,6 @@ def event_dashboard(request):
 
     if request.user.is_anonymous:
         return redirect('user-login')
-
-    # don't push dead code
-
-    # query = request.GET.get('q')
-    # if query:
-    # 	events = events.filter(
-    # 		Q(name__contains=query)|
-    # 		Q(description__icontains=query)|
-    # 		Q(organizer__username__icontains=query)
-    # 		).distinct()
 
     context = {
         "events": events,
@@ -180,13 +175,3 @@ def attended(request):
         "bookings": bookings,
     }
     return render(request, 'attended.html', context)
-    # events = Event.objects.filter(
-    # 	booked = booked,
-    # 	event=request.event.event_id
-    # 	)
-    # if request.user.is_anonymous:
-    # 	return redirect('user-login')
-    # context = {
-    # 	"event_obj": event_obj,
-    # 	}
-    # return render(request,'attended.html',context)

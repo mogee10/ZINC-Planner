@@ -18,15 +18,13 @@
           Fully Booked!
         </button>
       {% else %}
-        <a href="{% url 'booked-event' event.id %}">
-          <button class="btn btn-light" >
-            {% if action == 'booked'%}
-              Booked
-            {% else %}
-              Book Event
-            {% endif %}
-          </button>
-        </a>
+        <a href="{% url 'booked-event' event.id %}"><button class="btn btn-light">
+          {% if action == 'booked'%}
+            Booked
+          {% else %}
+          Book Event
+          {% endif %}
+        </button></a>
       {% endif %}
       
       {% if request.user == event.organizer %}
@@ -34,7 +32,12 @@
           <a href="{% url 'event-update' event.id %}" class="btn btn-outline-secondary">Update</a>
           <a href="{% url 'event-delete' event.id %}" class="btn btn-outline-secondary">Delete</a>
         </div>
+
+      {% for booking in bookings %}
+      <br/>{{booking.user}}
+      {% endfor %}
       {% endif %}
+      
     </div>
   </div>
 </div>
