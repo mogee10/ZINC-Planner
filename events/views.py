@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Q
+from datetime import date
 
 from .models import Event
 from .forms import UserRegisterForm, UserLoginForm, EventForm
@@ -11,7 +12,7 @@ from .forms import UserRegisterForm, UserLoginForm, EventForm
 
 # Create your views here.
 def event_list(request):
-    events = Event.objects.all()
+    events = Event.objects.filter(date__gte=date.today())
     query = request.GET.get('q')
     if query:
         events = events.filter(
@@ -19,6 +20,8 @@ def event_list(request):
             Q(description__icontains=query) |
             Q(organizer__username__icontains=query)
         ).distinct()
+
+
 
     context = {
         "events": events,

@@ -20,3 +20,4 @@ class Category(models.Model):
 class Booking(models.Model):
 	event =  models.ForeignKey(Event, on_delete=models.CASCADE)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+
