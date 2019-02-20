@@ -6,8 +6,9 @@
 {% block content %}
     
 <br>
-<div class="card">
-  <h5 class="card-header">Create Event</h5>
+<div class="card my-card text-center my-3">
+  <h3 class="card-header"><strong>Create Event</strong></h3>
+</div>
   <div class="card-body">
     <p class="card-text">
         <form action="{% url 'event-create' %}" method="POST" enctype="multipart/form-data">
@@ -19,3 +20,4 @@
   </div>
 </div>
 {% endblock content %}
+
