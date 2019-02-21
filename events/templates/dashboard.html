@@ -19,7 +19,7 @@
     <div class="col-md-4">
         <div class="card my-card text-center my-3">
           <div class="card-body">
-            <h3 class="card-title">{{event.name}}</h3>
+            <h3 class="card-title"><strong>{{event.name}}</strong></h3>
             <div class="image round fit">
             <img id="eventimg" class="card-img-top" height="200" src="{{event.image.url}}">
             </div>
@@ -37,14 +37,16 @@
 </br>
 </br>
 </br>
-<h2><strong> Events Attended </strong></h2>
+
+
+<h2 class="font-italic"><strong>Events Attended</strong></h2>
 <div class="container">
 <div class="row">
     {% for booking in bookings %}
     <div class="col-md-4">
         <div class="card my-card text-center my-3">
           <div class="card-body">
-            <h3 class="card-title">{{booking.event.name}}</h3>
+            <h3 class="card-title"><strong>{{booking.event.name}}</strong></h3>
             <div class="image round fit">
             <img id="eventimg" class="card-img-top" height="200" src="{{booking.event.image.url}}">
             </div>

@@ -5,6 +5,13 @@
 {% block title %}Detail{% endblock title %}
 
 {% block content %}
+
+{% if remaining_seats == 0 %}
+				<div class="alert alert-danger" role="alert">
+  				Sorry! This event is fully booked :(
+				</div>
+			{% endif %}
+			
 <div class="container">
 	<div class="m-5">
 		<h2 class="card-title"><strong>Event - </strong> {{event.name}}</h2>
@@ -26,6 +33,13 @@
 					{% endif %}
 				</button></a>
 			{% endif %}
+			{% if remaining_seats <= 10 %}
+			<p class ="text-danger">{{remaining_seats}} seats left </p>
+		</div>
+			{% endif %}
+
+			
+
 			
 			{% if request.user == event.organizer %}
 				<div class="align-right">

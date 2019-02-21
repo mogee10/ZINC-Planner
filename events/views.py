@@ -35,6 +35,8 @@ def event_detail(request, event_id):
     bookings = []
     if request.user.is_authenticated:
         bookings = event.booking_set.all()
+        remaining_seats = event.capacity - event.booking_set.all().count()
+
         if event.booking_set.filter(user=request.user).count() > 0:
             action = "booked"
         elif event.booking_set.all().count() >= event.capacity:
@@ -46,6 +48,7 @@ def event_detail(request, event_id):
         "event": event,
         "action": action,
         "bookings": bookings,
+        "remaining_seats": remaining_seats
     }
     return render(request, 'detail.html', context)
 
