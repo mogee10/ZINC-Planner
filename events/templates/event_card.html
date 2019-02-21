@@ -1,0 +1,14 @@
+<div class="col-md-4">
+    <div class="card my-card text-center my-3">
+        <div class="card-body">
+            <h3 class="card-title"><strong>{{event.name}}</strong></h3>
+            <div class="image round fit">
+            <img id="eventimg" class="card-img-top" height="200" src="{{event.image.url}}">
+            </div>
+            <p class="card-text">{{event.date}}</p>
+            <h5 class="card-text"><i class="far fa-user-circle"></i> {{event.organizer}}</h5>
+            <p class="card-text">{{event.capacity}} tickets available</p>
+            <a href="{% url 'event-detail' event.id %}" class="btn btn-outline-dark">View</a>
+        </div>
+    </div>
+</div>
