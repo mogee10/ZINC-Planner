@@ -161,11 +161,12 @@ def booking(request, event_id):
         return redirect('user-login')
 
         # CHECK IF AT CAPACITY
+    at_capacity = event_object.booking_set.all().count() >= event_object.capacity
 
     favorite, created = Booking.objects.get_or_create(
         user=request.user, event=event_object)
 
-    if not created:
+    if at_capacity or not created:
         favorite.delete()
 
     return redirect('event-detail', event_id)
