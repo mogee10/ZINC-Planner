@@ -8,7 +8,7 @@
   <div class="container">
     <h2><strong>My Events</strong></h2>
     {% include "event_list.html" %}
-    <h2><strong>Events Attended</strong></h2>
+    <h2 class="font-italic"><strong>Events Attended</strong></h2>
     <div class="row">
         {% for booking in bookings %}
           {% include "event_card.html" with event=booking.event %}
