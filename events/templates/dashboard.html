@@ -8,12 +8,14 @@
   <div class="container">
     <h2><strong>My Events</strong></h2>
     {% include "event_list.html" %}
-    <h2 class="font-italic"><strong>Events Attended</strong></h2>
-    <div class="row">
-        {% for booking in bookings %}
-          {% include "event_card.html" with event=booking.event %}
-        {% endfor %}
-    </div>
+    {% if bookings %}
+      <h2 class="font-italic"><strong>Events Booked</strong></h2>
+      <div class="row">
+          {% for booking in bookings %}
+            {% include "event_card.html" with event=booking.event %}
+          {% endfor %}
+      </div>
+    {% endif %}
   </div>
 </div>
 {% endblock content %}
