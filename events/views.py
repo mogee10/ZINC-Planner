@@ -163,7 +163,6 @@ def booking(request, event_id):
     if request.user.is_anonymous:
         return redirect('user-login')
 
-        # CHECK IF AT CAPACITY
     at_capacity = event_object.booking_set.all().count() >= event_object.capacity
 
     favorite, created = Booking.objects.get_or_create(
