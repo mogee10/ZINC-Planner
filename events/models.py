@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
 from fontawesome.fields import IconField
@@ -13,6 +14,10 @@ class Event (models.Model):
 
 	def __str__(self):
 		return self.name
+
+	@property
+	def passed(self):
+		return date.today() > self.date
 
 class Category(models.Model):
 	icon=IconField()
