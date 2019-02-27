@@ -33,6 +33,7 @@ def event_detail(request, event_id):
     event = Event.objects.get(id=event_id)
     action = ""
     bookings = []
+    remaining_seats = []
     if request.user.is_authenticated:
         bookings = event.booking_set.all()
         remaining_seats = event.capacity - event.booking_set.all().count()
@@ -48,7 +49,7 @@ def event_detail(request, event_id):
         "event": event,
         "action": action,
         "bookings": bookings,
-        "remaining_seats": remaining_seats
+        "remaining_seats": remaining_seats,
     }
     return render(request, 'detail.html', context)
 
